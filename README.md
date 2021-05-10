@@ -5,30 +5,48 @@ Temp Polls is a polling web application to create temporary polls
 ## Technologies
 
 - Django 2.2
+- Python 3.8
 - HTML 5
 - CSS 3
 - JavaScript (ES6+)
 
 ## Installation
 
-1. Open Terminal.
-2. Change the current working directory to the location where you want the cloned directory.
-3. Type git clone, and then paste the URL you copied earlier.
+1. Create a local copy of this git repository with `git clone` command.
 
-   ```python
-   $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+   ```shell
+   $ git clone https://github.com/givek/temp_polls.git
    ```
 
-4. Press Enter to create your local clone.
-5. Create a Virtual Enviornment with your desired package
+2. Create a Virtual Enviornment with the `venv` module.
 
-   ```python
-   python3 -m venv venv
+   ```shell
+   $ python3 -m venv venv
    ```
 
-6. install the requirements
-7. run migrations
-8. runserver
+3. Once you’ve created a virtual environment, you may activate it.
+
+   ```shell
+   $ source venv/bin/activate
+   ```
+
+4. Now, install the requirements from the `requirements.txt` file.
+
+   ```shell
+   $ pip install -r requirements.txt
+   ```
+
+5. Now, apply the migrations with the management command.
+
+   ```shell
+   $ python manage.py migrate
+   ```
+
+6. Finally, start the developement server with the management commnad.
+
+   ```shell
+   $ python manage.py runserver
+   ```
 
 ## **Authors**
 
