@@ -1,12 +1,8 @@
 ## Temp Polls
 
----
-
 Temp Polls is a polling web application to create temporary polls
 
 ## Technologies
-
----
 
 - Django 2.2
 - HTML 5
@@ -14,8 +10,6 @@ Temp Polls is a polling web application to create temporary polls
 - JavaScript (ES6+)
 
 ## Installation
-
----
 
 1. Open Terminal.
 2. Change the current working directory to the location where you want the cloned directory.
@@ -38,12 +32,8 @@ Temp Polls is a polling web application to create temporary polls
 
 ## **Authors**
 
----
-
 - Vivek Gandharkar - *Initial work* - [givek](https://github.com/givek)
 
 ## **License**
-
----
 
 This project is licensed under the MIT License - see the [LICENSE.md](../blob/main/LICENSE) file for details
