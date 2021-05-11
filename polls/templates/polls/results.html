@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-container container">
+
+        {% if poll.is_expired %}
+            <div class="expired-container">Poll expired</div>
+        {% endif %}
+
+        <h2 class="question-text">{{ poll.question }}</h2>
+        <p class="timestamp">{{ poll.pub_date }}</p>
+        
+        {% for choice in poll.choice_set.all %}
+
+            <div class="result-container {% if choice.choice_text == cookie %} selected-choice {% endif %}">
+                <div class="flex-container top">
+                    <label class="form-label choice-text-label">{{ choice.choice_text }}</label>
+                    <label class="form-label vote-label">{{ choice.votes }} vote{{ choice.votes|pluralize }}</label>
+                </div>
+                
+                <div class="progress-wrap progress">
+                    <div class="progress-bar"  data-progress-percent="{{ choice.get_percentage }}"></div>
+                </div>
+                
+                <div class="flex-container bottom">
+                    <label class="form-label percentage-label">{{ choice.get_percentage|floatformat:2 }}%</label>
+                </div>
+            </div>
+
+        {% endfor %}
+
+        {% if not cookie and not poll.is_expired %}
+            <div class="flex-container vote-link-container">
+                <a class="vote-link" href="{% url 'vote' poll.uuid %}">Vote?</a>
+            </div>
+        {% endif %}
+        
+    </div>
+{% endblock content %}
+        
+
+{% block script %}
+    <script>
+        window.addEventListener('load', () => {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(progressBar => {
+                const progress = progressBar.getAttribute('data-progress-percent');
+                progressBar.style.opacity = 1;
+                progressBar.style.width = progress+'%';
+            });
+        });
+    </script>
+{% endblock script %}

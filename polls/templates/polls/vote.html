@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-container container">
+
+        <h2 class="question-text">{{ poll.question }}</h2>
+
+        <p class="timestamp">{{ poll.pub_date }}</p>
+
+        <form action="{% url 'vote' poll.uuid %}" method="post"> 
+            {% if error_message %}
+                <p class="errorlist">{{ error_message }}</p>
+            {% endif %}
+                
+            {% csrf_token %}
+            {% for choice in poll.choice_set.all %}
+                <div class="container choice-container">
+                    <input class="choice-input form-input" type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                    <label class="form-label-vote" for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                </div>
+            {% endfor %}
+            <input class="btn submit-btn" type="submit" value="Submit">
+        </form>
+        
+    </div>
+{% endblock content %}
+
+
+{% block script %}
+    <script>
+        const choiceContainers = document.querySelectorAll('.choice-container');
+
+        choiceContainers.forEach(choiceContainer => {
+            choiceContainer.addEventListener('click', () => {
+                choiceContainer.getElementsByTagName('input')[0].checked = true;
+
+                const selectedChoice = document.querySelector('.selected-choice')
+                if (selectedChoice) selectedChoice.classList.toggle('selected-choice');
+                choiceContainer.classList.toggle('selected-choice');
+
+                const formLabelClick = document.querySelector('.form-label-click');
+                if (formLabelClick) formLabelClick.classList.toggle('form-label-click');
+                choiceContainer.getElementsByTagName('label')[0].classList.toggle('form-label-click');
+            });
+        })
+    </script>
+{% endblock script %}

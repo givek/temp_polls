@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="form-container container">
+            
+        <form method="POST" action="">
+            <legend class="form-legend">Easily Create <span>Temporary</span> Polls!</legend>
+            
+            {% if poll.id %} 
+                {% if poll.is_expired %}
+                    <div class="expired-container">Poll expired</div>
+                {% endif %}
+            {% endif %} 
+            
+            {% csrf_token %}
+            <label class="form-label question-label" for="question">Ask your question</label>
+            {{ poll_form.question }}
+            {{ poll_form.question.errors }}
+            
+            {{ formset.management_form }}
+            <div class="choice-contianer container">
+                <label class="form-label choice-label" for="choice">Create options</label>
+                <div id="form_set">
+                    {% for form in formset %}
+                        <td>{{ form.id }}</td> 
+                        {{ form.choice_text.errors }}
+                        <table class='no_error'>
+                            {{ form.choice_text }}
+                        </table>
+                    {% endfor %}
+                </div>
+                <svg class="delete-icon" id="remove" width="23" height="23" viewBox="0 0 23 23" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.9706 5.65685C16.783 5.46932 16.5287 5.36396 16.2635 5.36396C15.9983 5.36396 15.7439 5.46932 15.5564 5.65685L11.3137 9.89949L7.07108 5.65685C6.88354 5.46932 6.62919 5.36396 6.36397 5.36396C6.09876 5.36396 5.8444 5.46932 5.65687 5.65685C5.46933 5.84439 5.36397 6.09874 5.36397 6.36396C5.36397 6.62918 5.46933 6.88353 5.65687 7.07107L9.89951 11.3137L5.65687 15.5563C5.46933 15.7439 5.36397 15.9982 5.36397 16.2635C5.36397 16.5287 5.46933 16.783 5.65687 16.9706C5.8444 17.1581 6.09876 17.2635 6.36397 17.2635C6.62919 17.2635 6.88354 17.1581 7.07108 16.9706L11.3137 12.7279L15.5564 16.9706C15.7439 17.1581 15.9983 17.2635 16.2635 17.2635C16.5287 17.2635 16.783 17.1581 16.9706 16.9706C17.1581 16.783 17.2635 16.5287 17.2635 16.2635C17.2635 15.9982 17.1581 15.7439 16.9706 15.5563L12.7279 11.3137L16.9706 7.07107C17.1581 6.88353 17.2635 6.62918 17.2635 6.36396C17.2635 6.09874 17.1581 5.84439 16.9706 5.65685Z" fill="black"/>
+                </svg>
+                <div class="flex-container">
+                    <div class="add-container contianer" id="add_more">
+                        <svg class="add-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 0C7.73478 0 7.48043 0.105357 7.29289 0.292893C7.10536 0.48043 7 0.734784 7 1V7H1C0.734784 7 0.48043 7.10536 0.292893 7.29289C0.105357 7.48043 0 7.73478 0 8C0 8.26522 0.105357 8.51957 0.292893 8.70711C0.48043 8.89464 0.734784 9 1 9H7V15C7 15.2652 7.10536 15.5196 7.29289 15.7071C7.48043 15.8946 7.73478 16 8 16C8.26522 16 8.51957 15.8946 8.70711 15.7071C8.89464 15.5196 9 15.2652 9 15V9H15C15.2652 9 15.5196 8.89464 15.7071 8.70711C15.8946 8.51957 16 8.26522 16 8C16 7.73478 15.8946 7.48043 15.7071 7.29289C15.5196 7.10536 15.2652 7 15 7H9V1C9 0.734784 8.89464 0.48043 8.70711 0.292893C8.51957 0.105357 8.26522 0 8 0Z" fill="black"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <label class="form-label duration-label" for="duration">Duration</label>
+            {{ poll_form.duration.errors }}
+            {{ poll_form.duration }}
+
+            <div class="flex-container">
+                <input class="btn signin-btn" type="submit" {% if poll.id %} value="Update poll" {% else %} value="Create poll" {% endif %}>
+            </div>
+
+            <div id="empty_form" style="display:none">
+                <table class='no_error'>
+                    {{ formset.empty_form.choice_text }}
+                </table>
+            </div>
+        
+        </form>
+
+    </div>
+{% endblock content %}
+
+
+{% block script %}
+    <script>
+        const addMoreButton = document.getElementById("add_more");
+        const removeButton = document.getElementById("remove");
+        const choiceSet = document.getElementById("id_choice_set-TOTAL_FORMS");
+        const formSet = document.getElementById("form_set");
+        const emptyForm = document.getElementById("empty_form");
+
+        addMoreButton.addEventListener("click", () => {
+            let formIndex = choiceSet.getAttribute("value");
+            formSet.insertAdjacentHTML(
+                "beforeend",
+                emptyForm.innerHTML.replace(/__prefix__/g, formIndex)
+            );
+            choiceSet.setAttribute("value", parseInt(formIndex) + 1);
+        });
+
+        removeButton.addEventListener("click", () => {
+            let formIndex = choiceSet.getAttribute("value");
+            if (parseInt(formIndex) > 2) {
+                const last_input = document.getElementById(
+                    `id_choice_set-${parseInt(formIndex) - 1}-choice_text`
+                );
+                formSet.removeChild(last_input);
+                choiceSet.setAttribute("value", parseInt(formIndex) - 1);
+            }
+        });
+    </script>
+{% endblock script %}
+    
