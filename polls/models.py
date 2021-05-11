@@ -19,6 +19,13 @@ class Poll(models.Model):
     def __str__(self):
         return self.question
 
+    def get_total_seconds(self):
+        return (self.duration - self.pub_date).total_seconds()
+
+    def is_expired(self):
+        if self.duration >= timezone.now():
+            return False
+        return True
 
 
 class Choice(models.Model):
