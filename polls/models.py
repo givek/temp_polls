@@ -35,3 +35,18 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
+    def get_percentage(self):
+        poll = Poll.objects.get(choice=self.pk)
+        choices = Choice.objects.filter(poll=poll.pk)
+        
+        total_count = 0
+        for choice in choices:
+            total_count = total_count + choice.votes
+
+        votes = self.votes
+        if total_count == 0:
+            percentage = 0
+        else:
+            percentage = votes * 100 / total_count
+        return percentage
