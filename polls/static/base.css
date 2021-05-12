@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    --fw-reg: 300;
+    --fw-med: 500;
+    --fw-semi: 600;
+    --fw-bold: 700;
+    --pri-color: #7165E3;
+    --sec-color: #877bfa;
+}
+
+.main {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.nav { 
+    padding: 2% 5%;
+}
+
+.logo {
+    color: #000000;
+    font-weight: var(--fw-semi);
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.form-container {
+    padding: 5%;
+}
+
+.form-legend {
+    font-weight: var(--fw-semi);
+    font-size: 1.8rem;
+    line-height: 37px;
+    margin-bottom: 11%;
+}
+
+.logo span, .form-legend span {
+    color: var(--pri-color);
+}
+
+.expired-container {
+    border: 2px solid tomato;
+    height: 30px;
+    width: 90px;
+    margin-bottom: 4%;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: var(--fw-semi);
+    color: tomato;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: var(--fw-med);
+    margin-top: 10.5%;
+}
+
+.question-label {
+    margin-top: 0;
+}
+
+.form-input {
+    display: block;
+    font-weight: var(--fw-reg);
+    font-size: 1rem;
+    border: 2px solid #c4c4c4;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 7px 15px;
+    width: 100%;
+}
+
+.question-input {
+    height: 120px;
+    resize: none;
+}
+
+.choice-contianer, .delete-icon {
+    display: inline-block;
+    width: 100%;
+}
+
+.choice-contianer {
+    position: relative;
+}
+
+.delete-icon {
+    position: absolute;
+    right: 1.6%;
+    bottom: 52px;
+    height: 25px;
+    width: 25px;
+    transition: all 0.2s;
+}
+
+.delete-icon path {
+    fill: tomato;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;    
+}
+
+.add-container {
+    background-color: var(--pri-color);
+    margin-top: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-icon path {
+    fill: #ffffff;
+}
+
+.duration-input {
+    width: 56%;
+    max-width: 190px;
+    background: #ffffff;
+}
+
+.btn {
+    width: 100%;
+    height: 35px;
+    margin-top: 35px;
+    color: #ffffff;
+    background-color: var(--pri-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: var(--fw-semi);
+    font-size: 16px; 
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--sec-color);
+}
+
+.form-input:focus {
+    border-color: var(--pri-color);
+    outline: none;
+}
+
+.errorlist {
+    margin-top: 10px;
+    list-style: none;
+    color: red;
+}
+
+
+@media (min-width: 40rem) {
+
+    .nav {
+        padding: 10px 30px;
+    }
+
+    .form-container {
+        max-width: 540px;
+        margin: 0 auto;
+        padding: 35px 0;
+    }
+    
+    .form-legend {
+        font-size: 2rem;
+    }
+    
+    .form-label {
+        font-size: 1.25rem;
+    }
+
+    .delete-icon {
+        right: 6px;
+        bottom: 50px;
+    }
+
+    .delete-icon path {
+        fill: #c4c4c4;
+    }
+    
+    .delete-icon path:hover {
+        fill: tomato;
+    }
+
+    .add-container {
+        background-color: #c4c4c4;
+    }
+
+    .add-container:hover {
+        background-color: var(--pri-color);
+    }
+
+    .duration-input {
+        width: 200px;
+    }
+    
+    .btn {
+        width: 180px;
+    }  
+}
