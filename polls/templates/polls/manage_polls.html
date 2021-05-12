@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_head %}
+    <!-- <link rel="stylesheet" href="{% static 'polls/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock extra_head %}
+    
 
 {% block content %}
     <div class="form-container container">
