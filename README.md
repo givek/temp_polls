@@ -1,16 +1,14 @@
 ## Temp Polls
 
-![Preview](../assets/preview.png)
-
 Temp Polls is a simple polling web application to create temporary polls anonymously, it uses browser cookies to store user choice for a particular poll.
 
 ## Technologies
 
-- Django 2.2
-- Python 3.8
-- HTML 5
-- CSS 3
-- JavaScript (ES6+)
+- Django
+- Python
+- HTML
+- CSS
+- JavaScript
 
 ## Getting Started
 
