@@ -89,4 +89,4 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](../blob/main/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](../main/LICENSE) file for details
